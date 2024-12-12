@@ -1,3 +1,4 @@
+import StyledComponentsRegistry from "@/lib/registry";
 import Nav from "./_components/Nav/Nav";
 
 export default function RootLayout({
@@ -8,8 +9,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Nav />
-        {children}
+        <StyledComponentsRegistry>
+          <Nav />
+          {children}
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
