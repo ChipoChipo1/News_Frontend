@@ -20,6 +20,6 @@ jobs:
       - name: Push changes to my fork
         run: |
           git config --global user.name "vaynel"
-          git config --global user.email "ss040401@gmail.com"
-          git remote add myfork https://<vaynel>:${{ secrets.AUTH_TOKEN }}@github.com/<vanel>/<YOUR_REPO_NAME>.git
+          git config --global user.email "ss04041@gmail.com"
+          git remote add myfork https://vaynel:${{ secrets.AUTH_TOKEN }}@github.com/vanel/New_Front_Dev.git
           git push myfork master --force
