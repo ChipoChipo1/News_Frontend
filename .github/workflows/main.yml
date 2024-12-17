@@ -1,30 +1,36 @@
-name: git push into another repo to deploy to vercel
+name: Sync master to main
+
 on:
   push:
-    branches: [master]
+    branches: [master] # 원본 레포지토리의 master 브랜치가 업데이트될 때 실행
 
 jobs:
   sync-fork:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 원본 레포지토리 가져오기
-      - name: Checkout upstream repository
+      # 1. 원본 레포지토리의 master 브랜치 가져오기
+      - name: Checkout upstream repository (master)
         uses: actions/checkout@v3
         with:
           repository: ChipoChipo1/News_Frontend
           ref: master
-          token: ${{ secrets.AUTH_TOKEN }}
+          token: ${{ secrets.AUTH_TOKEN }} # 원본 레포지토리 접근용 PAT
 
-      # 2. Git 설정 및 main 브랜치 생성
-      - name: Configure Git User and Create main branch
+      # 2. 로컬 브랜치 이름을 main으로 변경
+      - name: Rename branch to main
+        run: |
+          git checkout master   # master 브랜치로 전환
+          git branch -m main    # master 브랜치를 main으로 이름 변경
+
+      # 3. Git 사용자 정보 설정
+      - name: Configure Git User
         run: |
           git config --global user.name "vaynel"
           git config --global user.email "ss04041@gmail.com"
-          git checkout -b main # master를 기반으로 main 브랜치 생성
 
-      # 3. 나의 개인 레포지토리로 Push
-      - name: Push changes to my fork
+      # 4. 개인 레포지토리의 main 브랜치로 Push
+      - name: Push to my fork (main branch)
         run: |
           git remote add myfork https://vaynel:${{ secrets.AUTH_TOKEN }}@github.com/vaynel/New_Front_Dev.git
           git push myfork main --force
