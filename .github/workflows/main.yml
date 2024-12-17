@@ -1,8 +1,7 @@
 name: git push into another repo to deploy to vercel
 on:
-  schedule:
-    - cron: "0 * * * *" # 매시간 확인
-  workflow_dispatch: # 수동으로 실행할 수 있도록 설정
+  push:
+    branches: [master]
 
 jobs:
   sync-fork:
