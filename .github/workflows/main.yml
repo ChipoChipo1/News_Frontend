@@ -22,4 +22,4 @@ jobs:
           git config --global user.name "vaynel"
           git config --global user.email "ss04041@gmail.com"
           git remote add myfork https://vaynel:${{ secrets.AUTH_TOKEN }}@github.com/vaynel/New_Front_Dev.git
-          git push myfork master --force
+          git push myfork main --force
