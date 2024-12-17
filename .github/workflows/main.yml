@@ -1,30 +1,30 @@
-name: Sync main to main
+name: git push into another repo to deploy to vercel
 
 on:
   push:
-    branches: [main] # 원본 레포지토리의 main 브랜치가 업데이트될 때 실행
+    branches: [main]
 
 jobs:
-  sync-fork:
+  build:
     runs-on: ubuntu-latest
-
+    container: pandoc/latex
     steps:
-      # 1. 원본 레포지토리의 main 브랜치 가져오기
-      - name: Checkout upstream repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - name: Install mustache (to update the date)
+        run: apk add ruby && gem install mustache
+      - name: creates output
+        run: sh ./build.sh
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.AUTH_TOKEN }}
         with:
-          repository: ChipoChipo1/News_Frontend # 원본 레포지토리
-          ref: main                            # 가져올 브랜치
-          token: ${{ secrets.AUTH_TOKEN }}     # 원본 레포지토리 접근용 PAT
-
-      # 2. Git 사용자 정보 설정
-      - name: Configure Git User
-        run: |
-          git config --global user.name "vaynel"
-          git config --global user.email "ss04041@gmail.com"
-
-      # 3. 나의 개인 레포지토리의 main 브랜치로 Push
-      - name: Push to my fork
-        run: |
-          git remote add myfork https://vaynel:${{ secrets.vercel_news_front_dev }}@github.com/vaynel/New_Front_Dev.git
-          git push myfork main --force
+          source-directory: 'output'
+          destination-github-username: vaynel 
+          destination-repository-name: New_Front_Dev
+          user-email: ${{ secrets.OFFICIAL_ACCOUNT_EMAIL }}
+          commit-message: ${{ github.event.commits[0].message }}
+          target-branch: main
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
