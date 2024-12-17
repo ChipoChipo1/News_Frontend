@@ -5,7 +5,7 @@ import * as S from "./Nav.style";
 export default function Nav() {
   return (
     <div>
-      Navbar
+      테스트를 해봅니다
       <div>
         <S.MyLink href="/">Home</S.MyLink>
         <S.MyLink href="/user">User</S.MyLink>
