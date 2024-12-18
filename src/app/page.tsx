@@ -1,8 +1,5 @@
+import Main from "./_components/Main/Main";
 import "./globals.css";
 export default function Home() {
-  return (
-    <div>
-      <h2>테스트 성공??</h2>
-    </div>
-  );
+  return <Main />;
 }
