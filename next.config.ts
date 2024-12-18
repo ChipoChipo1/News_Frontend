@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   compiler: {
     styledComponents: true,
   },
+  reactStrictMode: true,
+  typescript: {
+    ignoreBuildErrors: false,
+  },
 };
 
 export default nextConfig;
