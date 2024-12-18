@@ -1,18 +1,20 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./Nav.style";
+import LoginModal from "../LopginModal/LoginModal";
 
 export default function Nav() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleLogin = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
-    <div>
-      <div>
-        <S.MyLink href="/">Home</S.MyLink>
-        <S.MyLink href="/user">User</S.MyLink>
-        <S.MyLink href="/user/friends">Friends</S.MyLink>
-        <S.MyLink href="/user/scrapDelivery">ScrapDelivery</S.MyLink>
-        <S.MyLink href="/newscrap/createNewScrap">CreateScrap</S.MyLink>
-      </div>
-      <hr/>
-    </div>
+    <S.NavContainer>
+      <S.MyLink href="/">페이퍼픽</S.MyLink>
+      <S.LoginBtn onClick={handleLogin}>Login</S.LoginBtn>
+      {isModalOpen && <LoginModal handleLogin={handleLogin} />}
+    </S.NavContainer>
   );
 }

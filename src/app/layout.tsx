@@ -1,7 +1,8 @@
 import StyledComponentsRegistry from "@/lib/registry";
 import Nav from "./_components/Nav/Nav";
 import { Metadata, Viewport } from "next";
-import { ReactNode } from "react";
+import "./globals.css";
+
 export const viewport: Viewport = {
   themeColor: "black",
   width: "device-width",
@@ -27,10 +28,8 @@ export const metadata: Metadata = {
 };
 export default function RootLayout({
   children,
-  //modal,
 }: Readonly<{
   children: React.ReactNode;
-  //modal: ReactNode;
 }>) {
   return (
     <html lang="en">
