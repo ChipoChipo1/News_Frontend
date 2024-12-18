@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "fabric": "^6.5.3",
+    "front_newsscrap": "file:",
     "next": "15.1.0",
     "next-pwa": "^5.6.0",
     "react": "^19.0.0",
