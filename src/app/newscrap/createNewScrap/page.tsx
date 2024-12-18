@@ -20,13 +20,16 @@ export default function Page() {
 
     // 도구 팝업 상태값
     const [showTool, setShowTool] = useState(false); // 도구창 표시 여부
+    const [showArrowTool,setShowArrowTool] = useState(false); // 라인도구창 표시 여부
+
     const [color, setColor] = useState("#F1FC90"); // 기본 색상
     const [lineWidth, setLineWidth] = useState(4); // 기본 굵기
     const [isHighlighterOn, setIsHighlighterOn] = useState(false); // 하이라이터 활성화 여부
 
+    const [ArrowNum,setArrowNum] = useState(1); // 화살표 번호 
+    const [ArrowWidth,setArrowWidth] = useState(2); // 화살표 굵기
 
-
-
+    // 캔버스 useEffect 24.12.19 재현
     useEffect(() => {
 
         if (!canvasRef.current) return;
@@ -214,9 +217,13 @@ export default function Page() {
                                 </S.ToolPopup>
                             )}
                         </S.ToolWrapper>
-                        <S.IconButton onClick={handleCreateTextbox}>
-                            <S.IconImage src={"/icon/ArrowIcon.png"} alt="Icon" />
-                        </S.IconButton>
+
+                        <S.ToolWrapper>
+                            <S.IconButton onClick={handleCreateTextbox}>
+                                <S.IconImage src={"/icon/ArrowIcon.png"} alt="Icon" />
+                            </S.IconButton>
+                        </S.ToolWrapper>
+
                         <S.IconButton onClick={handleCreateTextbox}>
                             <S.IconImage src={"/icon/TextIcon.png"} alt="Icon" />
                         </S.IconButton>
