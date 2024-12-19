@@ -2,9 +2,37 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Nav.style";
 import LoginModal from "../LopginModal/LoginModal";
+import { MainContainer } from "../Common/Common.style";
 
 export default function Nav() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // header 기본 height 값
+  const [headerH, setHeaderH] = useState<number>(60);
+  // 스크롤 위치
+  const [scrollY, setScrollY] = useState<number>(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // 스크롤 내리면 headrH 0으로 변경
+      if (currentScrollY > scrollY) {
+        setHeaderH(0);
+        setScrollY(currentScrollY);
+      } else if (currentScrollY < scrollY) {
+        // 스크롤 올리면 headerH 60으로변경
+
+        setHeaderH(60);
+        console.log(currentScrollY, "scrollY", scrollY);
+      }
+      // 이전 스크롤 위치 업데이트
+      setScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.addEventListener("scroll", handleScroll);
+    };
+  }, [scrollY]);
 
   const handleLogin = () => {
     setIsModalOpen(!isModalOpen);
@@ -30,10 +58,14 @@ export default function Nav() {
     };
   }, [isModalOpen]);
   return (
-    <S.NavContainer>
-      <S.MyLink href="/">페이퍼픽</S.MyLink>
-      <S.LoginBtn onClick={handleLogin}>Login</S.LoginBtn>
+    <>
+      <S.FixedCntainer headerH={headerH}>
+        <S.NavContainer headerH={headerH}>
+          <S.MyLink href="/">페이퍼픽</S.MyLink>
+          <S.LoginBtn onClick={handleLogin}>Login</S.LoginBtn>
+        </S.NavContainer>
+      </S.FixedCntainer>
       {isModalOpen && <LoginModal handleLogin={handleLogin} />}
-    </S.NavContainer>
+    </>
   );
 }

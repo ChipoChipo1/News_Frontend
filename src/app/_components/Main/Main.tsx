@@ -11,7 +11,7 @@ import Ranking from "./_components/Ranking";
 
 import { useKeywords } from "@/hooks/useKeywords";
 import { useScroll } from "@/hooks/useScroll";
-import { NewsCard as NewsCardType  } from "@/types/mainTyeps";
+import { NewsCard as NewsCardType } from "@/types/mainTyeps";
 
 export default function Main() {
   const [newsCard, setNewsCard] = useState<NewsCardType[]>([]);
@@ -24,20 +24,12 @@ export default function Main() {
     setLoadedItems((prev) => prev + 6); // 6개씩 더 로드
   });
 
-  // useEffect(() => {
-  //   // 더미 데이터에서 처음 12개만 로드
-  //   setNewsCard(
-  //     newsData.slice(0, loadedItems).filter((item) => item !== undefined)
-  //   );
-  // }, [loadedItems]);
-
   useEffect(() => {
     // 더미 데이터에서 처음 12개만 로드
     setNewsCard(
       newsData.slice(0, loadedItems).filter(Boolean) as NewsCardType[]
     );
   }, [loadedItems]);
-
 
   const topRateNews = rankingData
     .sort((a, b) => b.views - a.views)
