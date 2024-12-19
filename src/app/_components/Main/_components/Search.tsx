@@ -14,7 +14,7 @@ export default function Search({
   handleSearch,
 }: SearchProps) {
   return (
-    <S.SerachForm onSubmit={handleSubmit}>
+    <S.SearchForm onSubmit={handleSubmit}>
       <S.SearchInput
         type="text"
         placeholder="Keyword Search"
@@ -22,6 +22,6 @@ export default function Search({
         onChange={handleSearch}
       />
       <S.SearchIcon src={SearchIcon} alt="Search Icon" />
-    </S.SerachForm>
+    </S.SearchForm>
   );
 }

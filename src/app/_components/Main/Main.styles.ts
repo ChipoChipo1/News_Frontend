@@ -4,7 +4,7 @@ import { MainContainer } from "../Common/Common.style";
 
 // left
 export const LeftContainer = styled.div`
-  margin-top: 10px;
+  margin-top: 70px;
   width: 74%;
 `;
 
@@ -114,6 +114,7 @@ export const NewsCardBottom = styled.div`
   display: flex;
   align-items: center;
   background-color: var(--secondaryColor);
+  border-top: 1px solid var(--blackColor);
 `;
 export const NewsCardKeyword = styled.span`
   font-size: 12px;
@@ -130,7 +131,7 @@ export const RightContainer = styled.div`
   justify-content: start;
   margin-top: 75px;
 `;
-export const SerachForm = styled.form`
+export const SearchForm = styled.form`
   width: 100%;
   position: relative;
 `;
