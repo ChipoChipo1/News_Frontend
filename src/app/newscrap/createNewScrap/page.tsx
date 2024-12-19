@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Canvas, Rect, Textbox, TEvent, FabricImage, FabricObject, PencilBrush } from "fabric"; // Textbox 추가
+import { Canvas, Textbox,  FabricImage,  PencilBrush } from "fabric"; // Textbox 추가
 import * as S from "./CreateNewScrap.style";
 
 export default function Page() {
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const fabricCanvasRef = useRef<Canvas | null>(null); // Canvas 인스턴스 영구 저장
-    const [isCreating, setIsCreating] = useState(false);
+    //const [isCreating, setIsCreating] = useState(false);
     const [images] = useState([
         "/img/newsimg1.jpg",
         "/img/newsimg2.jpg",
@@ -20,24 +20,20 @@ export default function Page() {
 
     // 도구 팝업 상태값
     const [showTool, setShowTool] = useState(false); // 도구창 표시 여부
-    const [showArrowTool,setShowArrowTool] = useState(false); // 라인도구창 표시 여부
+   // const [showArrowTool,setShowArrowTool] = useState(false); // 라인도구창 표시 여부
 
     const [color, setColor] = useState("#F1FC90"); // 기본 색상
     const [lineWidth, setLineWidth] = useState(4); // 기본 굵기
     const [isHighlighterOn, setIsHighlighterOn] = useState(false); // 하이라이터 활성화 여부
 
-    const [ArrowNum,setArrowNum] = useState(1); // 화살표 번호 
-    const [ArrowWidth,setArrowWidth] = useState(2); // 화살표 굵기
+   // const [ArrowNum,setArrowNum] = useState(1); // 화살표 번호 
+   // const [ArrowWidth,setArrowWidth] = useState(2); // 화살표 굵기
 
     // 캔버스 useEffect 24.12.19 재현
     useEffect(() => {
 
         if (!canvasRef.current) return;
         if (fabricCanvasRef.current) return;
-
-        // 동적으로 vh, vw를 px로 변환
-        const canvasWidth = window.innerWidth * 0.8; // 80vw
-        const canvasHeight = window.innerHeight * 0.8; // 60vh
 
         const canvas = new Canvas(canvasRef.current, {
             backgroundColor: "#E3E3E3",
@@ -99,17 +95,6 @@ export default function Page() {
         canvas.freeDrawingBrush = highlighter;
         canvas.isDrawingMode = true;
     }, [color, lineWidth, isHighlighterOn]); // 상태 변화 감지
-
-    // Canvas 존재 여부 확인 함수
-    const CheckCanvasIs = () => {
-        if (fabricCanvasRef.current) {
-            console.log("Canvas가 존재합니다!", fabricCanvasRef.current);
-            alert("Canvas가 존재합니다!");
-        } else {
-            console.log("Canvas가 존재하지 않습니다.");
-            alert("Canvas가 존재하지 않습니다.");
-        }
-    };
 
     // HEX -> RGBA 변환 함수
     const hexToRGBA = (hex: string, opacity: number) => {
