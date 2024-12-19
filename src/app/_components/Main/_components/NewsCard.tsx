@@ -21,7 +21,7 @@ export default function NewsCard({ newsCard }: NewsCardProps) {
               <S.NewsTitle>{newsCard.title}</S.NewsTitle>
             </S.TopLeft>
             <S.TopRight>
-              <S.TopBtn>
+              <S.TopBtn >
                 <Image src={ScrapIcon} alt="scrap icon" />
               </S.TopBtn>
               <S.TopBtn>
